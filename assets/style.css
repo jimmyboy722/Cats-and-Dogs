@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.page-title {
+  background: rgb(71, 98, 171);
+  background: linear-gradient(
+    127deg,
+    rgba(71, 98, 171, 1) 0%,
+    rgba(23, 38, 184, 1) 75%
+  );
+  height: 80px;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  padding-top: 20px;
+  padding-left: 300px;
+  font-family: serif;
+}
