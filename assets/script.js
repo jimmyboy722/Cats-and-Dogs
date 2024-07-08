@@ -1,18 +1,29 @@
-const cityList = document.querySelector("ul");
 const weatherApiKey = "cde00dd405f02d88dbf0fc6213a3ac98";
-let city;
-function getApi() {
-  const requestUrl =
-    "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      for (let i = 0; i < data.length; i++) {
-        const cityName = document.createElement("li");
-        cityName.textContent = data[i].html_url;
-        cityList.appendChild(cityName);
-      }
-    });
+const cityWeatherForm = document.querySelector(".cityWeatherForm");
+const citySelect = document.querySelector(".citySelect");
+const card = document.querySelector(".card");
+
+cityWeatherForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const city = citySelect.value;
+  if (city) {
+  } else {
+    displayError("Please Enter a City");
+  }
+});
+
+async function getWeatherData(city) {}
+
+function displayWeatherInfo(data) {}
+
+function getWeatherEmoji(weatherId) {}
+
+function displayError(message) {
+  const errorDisplay = document.createElement("p");
+  errorDisplay.textContent = message;
+  errorDisplay.classList.add("errorDisplay");
+
+  card.textContent = "";
+  card.style.display = "flex";
+  card.appendChild(errorDisplay);
 }

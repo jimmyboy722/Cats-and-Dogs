@@ -10,7 +10,15 @@
     <header class="page-title">
       <h1>Weather Dashboard</h1>
     </header>
-    <main id="container"></main>
+    <main class="container">
+      <form class="cityWeatherForm">
+        <h2 class="formTitle">Search for a City:</h2>
+        <input type="text" class="citySelect" placeholder="Enter City" />
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="card" style="display: none"></div>
+    </main>
     <script src="./assets/script.js"></script>
   </body>
 </html>
