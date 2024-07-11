@@ -13,3 +13,4 @@ but the 5 day forecast for that city as well.
  - Using parameters in the url request and a fetch request for the weather data.
 
 ## The following is a screen shot of the app, followed by a link to the deployed applicaiton. Hope you enjoy!
+![Screenshot 2024-07-11 014915](https://github.com/jimmyboy722/Cats-and-Dogs/assets/169507618/43e75118-284d-4a7f-beed-86e3b57320d6)
