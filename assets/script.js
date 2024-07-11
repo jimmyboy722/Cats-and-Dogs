@@ -7,6 +7,7 @@ const card1 = document.querySelector(".card1");
 const card2 = document.querySelector(".card2");
 // FUNCTION FOR CURRENT WEATHER
 function getCurrentWeather(cityName) {
+  card1.innerHTML = "";
   const requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
   fetch(requestURL)
     .then(function (response) {
@@ -43,6 +44,7 @@ function getCurrentWeather(cityName) {
 // function to getForecast()
 
 function getForecast(cityName) {
+  card2.innerHTML = "";
   const requestURL = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
   fetch(requestURL)
     .then(function (response) {
@@ -83,13 +85,39 @@ function getForecast(cityName) {
       }
     });
 }
+// FUNCTION FOR SAVING CITY SEARCH HISTORY
+function searchHistory(cityName) {
+  let history = localStorage.getItem("history");
+  let parsedHistory = [];
+  if (history) {
+    parsedHistory = JSON.parse(history);
+  }
+  parsedHistory.push(cityName);
+  localStorage.setItem("history", JSON.stringify(parsedHistory));
+}
 
+function renderSearchHistory() {
+  const historyContainer = document.querySelector(".history");
+  historyContainer.innerHTML = "";
+  let history = localStorage.getItem("history");
+  let parsedHistory = [];
+  if (history) {
+    parsedHistory = JSON.parse(history);
+  }
+  for (let i = 0; i < parsedHistory.length; i++) {
+    const pastCity = document.createElement("p");
+    pastCity.innerText = parsedHistory[i];
+    historyContainer.appendChild(pastCity);
+  }
+}
 cityWeatherForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const city = citySelect.value;
   if (city) {
     getCurrentWeather(city);
     getForecast(city);
+    searchHistory(city);
+    renderSearchHistory();
   } else {
     displayError("Please Enter a City");
   }
