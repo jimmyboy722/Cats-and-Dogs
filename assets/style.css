@@ -99,3 +99,14 @@ ul {
   background-color: #2a4a7d;
   border: 5px solid #fff;
 }
+
+.history {
+  background-color: darkgray;
+  width: 190px;
+  margin-left: 12px;
+  text-align: center;
+}
+
+.history p {
+  border: 5px solid #fff;
+}

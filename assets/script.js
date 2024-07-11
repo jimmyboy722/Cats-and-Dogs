@@ -1,4 +1,3 @@
-// const { foregroundChild } = require("foreground-child/dist/commonjs");
 // GLOBAL VARIABLES
 const weatherApiKey = "cde00dd405f02d88dbf0fc6213a3ac98";
 const cityWeatherForm = document.querySelector(".cityWeatherForm");
@@ -41,7 +40,7 @@ function getCurrentWeather(cityName) {
     });
 }
 
-// function to getForecast()
+// FUNCTION TO GET AND DISPLAY 5 DAY FORECAST OF A CITY
 
 function getForecast(cityName) {
   card2.innerHTML = "";
@@ -95,7 +94,7 @@ function searchHistory(cityName) {
   parsedHistory.push(cityName);
   localStorage.setItem("history", JSON.stringify(parsedHistory));
 }
-
+// SHOWS PREVIOUSLY SEARCHED CITIES
 function renderSearchHistory() {
   const historyContainer = document.querySelector(".history");
   historyContainer.innerHTML = "";
@@ -110,6 +109,7 @@ function renderSearchHistory() {
     historyContainer.appendChild(pastCity);
   }
 }
+// ALLOWS CLICK OF SUBMIT BUTTON TO RUN FUNCTIONS OF THE APP
 cityWeatherForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const city = citySelect.value;
@@ -122,7 +122,7 @@ cityWeatherForm.addEventListener("submit", (event) => {
     displayError("Please Enter a City");
   }
 });
-
+// DISPLAYS ERROR MESSAGE IF INVALID INPUT IS ENTERED INTO SEARCH
 function displayError(message) {
   const errorDisplay = document.createElement("p");
   errorDisplay.textContent = message;
