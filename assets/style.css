@@ -29,6 +29,7 @@ h1 {
 
 .flexcontainer {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .formTitle {
@@ -64,13 +65,25 @@ button[type="submit"]:hover {
   background-color: rgb(38, 24, 224);
 }
 
-.card {
+.card1 {
   border: 2px solid;
   border-color: #c2c2d6;
   width: 400px;
   padding: 5px;
+  align-items: center;
 }
 
+.card2 {
+  background-color: #2a4a7d;
+}
+
+ul {
+  padding-top: 2px;
+}
+img {
+  height: 27px;
+  width: 27px;
+}
 .errorMessage {
   font-size: 2rem;
   font-weight: bold;

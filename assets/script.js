@@ -1,11 +1,11 @@
-const { foregroundChild } = require("foreground-child/dist/commonjs");
-
+// const { foregroundChild } = require("foreground-child/dist/commonjs");
+// GLOBAL VARIABLES
 const weatherApiKey = "cde00dd405f02d88dbf0fc6213a3ac98";
 const cityWeatherForm = document.querySelector(".cityWeatherForm");
 const citySelect = document.querySelector(".citySelect");
 const card1 = document.querySelector(".card1");
 const card2 = document.querySelector(".card2");
-
+// FUNCTION FOR CURRENT WEATHER
 function getCurrentWeather(cityName) {
   const requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
   fetch(requestURL)
@@ -47,27 +47,28 @@ function getForecast(cityName) {
       return response.json();
     })
     .then(function (data) {
-      const forecastData = document.createElement("ul");
-      const dayOfWeek = document.createElement("li");
-      const temp = document.createElement("li");
-      const wind = document.createElement("li");
-      const humidity = document.createElement("li");
-      const icon = document.createElement("img");
-      const date = new Date(data.dt * 1000);
-      icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+      for (let i = 0; i < data.length; i++) {
+        const forecastData = document.createElement("ul");
+        const dayOfWeek = document.createElement("li");
+        const icon = document.createElement("img");
+        const temp = document.createElement("li");
+        const wind = document.createElement("li");
+        const humidity = document.createElement("li");
+        const date = new Date(data.dt * 1000);
+        icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
 
-      dayOfWeek.innerText = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-      temp.innerText = `${data.main.temp}`;
-      wind.innerText = `${data.wind.speed}`;
-      humidity.innerText = `${data.main.humidity}`;
-      //APPENDING WEATHER DATA TO CARD VIA UL
-      currentWeather.appendChild(temp);
-      currentWeather.appendChild(wind);
-      currentWeather.appendChild(humidity);
-      // APPENDING ICON TO CARD HEADING
-      dayOfWeek.appendChild(icon);
+        dayOfWeek.innerText = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+        temp.innerText = `${data.main.temp}`;
+        wind.innerText = `${data.wind.speed}`;
+        humidity.innerText = `${data.main.humidity}`;
+        //APPENDING WEATHER DATA TO CARD VIA UL
+        forecastData.appendChild(temp);
+        forecastData.appendChild(wind);
+        forecastData.appendChild(humidity);
+        forecastData.appendChild(icon);
 
-      card2.appendChild(forecastData);
+        card2.appendChild(forecastData);
+      }
     });
 }
 
@@ -76,6 +77,7 @@ cityWeatherForm.addEventListener("submit", (event) => {
   const city = citySelect.value;
   if (city) {
     getCurrentWeather(city);
+    getForecast(city);
   } else {
     displayError("Please Enter a City");
   }
