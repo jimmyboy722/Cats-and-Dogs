@@ -22,10 +22,12 @@ function getCurrentWeather(cityName) {
       const date = new Date(data.dt * 1000);
       icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
 
-      location.innerText = `${cityName}(${date.getDate()}/${date.getMonth()}/${date.getFullYear()})`;
-      temp.innerText = `${data.main.temp}`;
-      wind.innerText = `${data.wind.speed}`;
-      humidity.innerText = `${data.main.humidity}`;
+      location.innerText = `${cityName}(${date.getDate()}/${
+        date.getMonth() + 1
+      }/${date.getFullYear()})`;
+      temp.innerText = `Temp: ${data.main.temp}°F`;
+      wind.innerText = `Wind Speed: ${data.wind.speed}MPH`;
+      humidity.innerText = `Humidity: ${data.main.humidity}%`;
       //APPENDING WEATHER DATA TO CARD VIA UL
       currentWeather.appendChild(temp);
       currentWeather.appendChild(wind);
@@ -41,33 +43,43 @@ function getCurrentWeather(cityName) {
 // function to getForecast()
 
 function getForecast(cityName) {
-  const requestURL = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${weatherApiKey}}`;
+  const requestURL = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
   fetch(requestURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      for (let i = 0; i < data.length; i++) {
-        const forecastData = document.createElement("ul");
+      let previousDate = undefined;
+
+      for (let i = 0; i < data.list.length; i++) {
+        const forecastData = data.list[i];
+        const currentDate = new Date(forecastData.dt * 1000);
+        if (previousDate && previousDate == currentDate.getDate()) {
+          continue;
+        }
+        previousDate = currentDate.getDate();
+        const forecastInfo = document.createElement("ul");
         const dayOfWeek = document.createElement("li");
         const icon = document.createElement("img");
         const temp = document.createElement("li");
         const wind = document.createElement("li");
         const humidity = document.createElement("li");
-        const date = new Date(data.dt * 1000);
-        icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+        icon.src = `https://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`;
 
-        dayOfWeek.innerText = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-        temp.innerText = `${data.main.temp}`;
-        wind.innerText = `${data.wind.speed}`;
-        humidity.innerText = `${data.main.humidity}`;
+        dayOfWeek.innerText = `${currentDate.getDate()}/${
+          currentDate.getMonth() + 1
+        }/${currentDate.getFullYear()}`;
+        temp.innerText = `Temp:${forecastData.main.temp}°F`;
+        wind.innerText = `Wind Speed:${forecastData.wind.speed} MPH`;
+        humidity.innerText = `Humidity: ${forecastData.main.humidity}%`;
         //APPENDING WEATHER DATA TO CARD VIA UL
-        forecastData.appendChild(temp);
-        forecastData.appendChild(wind);
-        forecastData.appendChild(humidity);
-        forecastData.appendChild(icon);
+        forecastInfo.appendChild(dayOfWeek);
+        forecastInfo.appendChild(temp);
+        forecastInfo.appendChild(wind);
+        forecastInfo.appendChild(humidity);
+        forecastInfo.appendChild(icon);
 
-        card2.appendChild(forecastData);
+        card2.appendChild(forecastInfo);
       }
     });
 }
@@ -88,7 +100,7 @@ function displayError(message) {
   errorDisplay.textContent = message;
   errorDisplay.classList.add("errorDisplay");
 
-  card.textContent = "";
-  card.style.display = "flex";
-  card.appendChild(errorDisplay);
+  card1.textContent = "";
+  card1.style.display = "flex";
+  card1.appendChild(errorDisplay);
 }

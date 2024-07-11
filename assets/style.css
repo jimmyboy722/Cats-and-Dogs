@@ -23,16 +23,18 @@ h1 {
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   /* align-items: center; */
 }
 
 .flexcontainer {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
 .formTitle {
+  display: flex;
   margin-bottom: 5px;
 }
 
@@ -44,6 +46,7 @@ h1 {
 }
 
 .citySelect {
+  display: flex;
   padding: 5px;
   font-weight: bold;
   border: 2px solid;
@@ -66,25 +69,33 @@ button[type="submit"]:hover {
 }
 
 .card1 {
+  width: 400px;
+}
+.card1 ul {
   border: 2px solid;
   border-color: #c2c2d6;
-  width: 400px;
+  /* width: 400px; */
   padding: 5px;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .card2 {
-  background-color: #2a4a7d;
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  border: 2px solid #fff;
 }
 
-ul {
-  padding-top: 2px;
-}
-img {
-  height: 27px;
-  width: 27px;
-}
 .errorMessage {
   font-size: 2rem;
   font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.card2 ul {
+  background-color: #2a4a7d;
+  border: 5px solid #fff;
 }
