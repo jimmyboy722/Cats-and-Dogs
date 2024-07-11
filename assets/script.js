@@ -99,7 +99,9 @@ function displayError(message) {
   const errorDisplay = document.createElement("p");
   errorDisplay.textContent = message;
   errorDisplay.classList.add("errorDisplay");
-
+  setTimeout(function () {
+    card1.removeChild(errorDisplay);
+  }, 2000);
   card1.textContent = "";
   card1.style.display = "flex";
   card1.appendChild(errorDisplay);
