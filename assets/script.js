@@ -44,7 +44,7 @@ function getCurrentWeather(cityName) {
 
 function getForecast(cityName) {
   card2.innerHTML = "";
-  const requestURL = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
+  const requestURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
   fetch(requestURL)
     .then(function (response) {
       return response.json();
